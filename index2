@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>APEC Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f2f2f2;
+    }
+    .login-box {
+      background-color: white;
+      display: inline-block;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input[type="text"], input[type="password"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #005fa3;
+    }
+    img.logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- APEC Logo -->
+  <img class="logo" src="https://media.licdn.com/dms/image/D4D0BAQG4feTbXpaq0w/company-logo_200_200/0/1697346843915?e=2147483647&v=beta&t=6eCzOllCngKpFwferIneF9s0Ec-RyhmmPEG-MGs9Df4" alt="APEC College Logo">
+
+  <div class="login-box">
+    <h2>Login to APEC Portal</h2>
+    <form>
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+</body>
+</html>
