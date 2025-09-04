@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit a Query</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 250px;
+      max-width: 90%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #msg {
+      margin-top: 15px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Submit a Query</h2>
+
+  <form id="searchForm" action="https://formspree.io/f/xpwjodnd" method="POST">
+    <label for="searchInput" style="display:none;">Your Query</label>
+    <input type="text" id="searchInput" name="search_query" placeholder="Type your query..." required>
+    
+    <!-- Honeypot field to prevent spam -->
+    <input type="text" name="_gotcha" style="display:none">
+    
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="msg"></p>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.style.display = 'none';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          msg.textContent = "✅ Thank you! Your query has been submitted.";
+          msg.style.color = "green";
+          form.reset();
+        } else {
+          msg.textContent = "❌ Submission failed. Please try again.";
+          msg.style.color = "red";
+        }
+      } catch (error) {
+        msg.textContent = "❌ Network error. Please check your connection.";
+        msg.style.color = "red";
+      }
+
+      msg.style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
