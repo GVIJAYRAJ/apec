@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Search Form</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+    }
+    #msg {
+      margin-top: 15px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Search Anything</h2>
+
+  <form id="searchForm" action="https://formspree.io/f/xpwjodnd" method="POST">
+    <input type="text" name="search_query" placeholder="Type something..." required>
+    <button type="submit">Search</button>
+  </form>
+
+  <p id="msg"></p>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const msg = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        msg.textContent = res.ok ? "✅ Submitted!" : "❌ Submission failed.";
+        msg.style.color = res.ok ? "green" : "red";
+        msg.style.display = "block";
+        if (res.ok) form.reset();
+      } catch {
+        msg.textContent = "❌ Network error.";
+        msg.style.color = "red";
+        msg.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
